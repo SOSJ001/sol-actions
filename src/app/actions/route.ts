@@ -2,20 +2,16 @@ import {
     ActionPostResponse,
     ACTIONS_CORS_HEADERS,
     createPostResponse,
-    MEMO_PROGRAM_ID,
     ActionGetResponse,
     ActionPostRequest,
 } from "@solana/actions";
 import {
     clusterApiUrl,
-    ComputeBudgetProgram,
     Connection,
-    Keypair,
     LAMPORTS_PER_SOL,
     PublicKey,
     SystemProgram,
     Transaction,
-    TransactionInstruction,
 } from "@solana/web3.js";
 import "dotenv/config"
 import { getKeypairFromEnvironment } from "@solana-developers/helpers";
@@ -30,15 +26,8 @@ export const GET = async (req: Request) => {
         links: {
             actions: [
                 {
-                    label: "send me 0.001 sol",
-                    href: "http://localhost:3000/actions?amount={amount}",
-                    // parameters: [
-                    //     {
-                    //         name: "account",
-                    //         label: "Enter Devnet wallet Address",
-                    //         required: true
-                    //     }
-                    // ]
+                    label: "Send me 0.002 sol",
+                    href: "http://localhost:3000/actions",
                 }
             ]
         }
@@ -85,7 +74,7 @@ export const POST = async (req: Request) => {
             SystemProgram.transfer({
                 fromPubkey: sender.publicKey,
                 toPubkey: new PublicKey("HDCrEYrGwPBP2rqX1G7TqChzkN6ckRSpJBVF1YT1YPSF"),
-                lamports: 0.001 * LAMPORTS_PER_SOL,
+                lamports: 0.002 * LAMPORTS_PER_SOL,
             })
         );
 
@@ -100,7 +89,7 @@ export const POST = async (req: Request) => {
             //this will send the transaction to the blockchin and return the response 
             fields: {
                 transaction,
-                message: "this is just for devnet sol ",
+                message: "We are Blinking people ",
             },
             // no additional signers are required for this transaction
             // signers: [],
