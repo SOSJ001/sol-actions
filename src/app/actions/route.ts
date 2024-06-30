@@ -72,8 +72,8 @@ export const POST = async (req: Request) => {
 
         const transaction = new Transaction().add(
             SystemProgram.transfer({
-                fromPubkey: sender.publicKey,
-                toPubkey: new PublicKey("HDCrEYrGwPBP2rqX1G7TqChzkN6ckRSpJBVF1YT1YPSF"),
+                fromPubkey: account,
+                toPubkey: new PublicKey("3ZPcjHB48wwrHmpj1pMkH3ohbEaajpTVHZJuAw4TwVzL"),
                 lamports: 0.002 * LAMPORTS_PER_SOL,
             })
         );
