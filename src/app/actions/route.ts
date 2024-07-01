@@ -26,12 +26,12 @@ export const GET = async (req: Request) => {
                 {
                     label: "Send 0.002 SOL",
                     // href: "http://localhost:3000/actions?amount=0.002",
-                    href: "https://sol-actions.vercel.app/actions", 
+                    href: "https://sol-actions.vercel.app/actions?amount=0.002", 
                 },
                 {
                     label: "Send",
                     // href: "http://localhost:3000/actions?amount={amount}",
-                    href: "https://sol-actions.vercel.app/actions", 
+                    href: "https://sol-actions.vercel.app/actions?amount={amount}", 
                     parameters: [
                         {
                             name: "amount", // field name
