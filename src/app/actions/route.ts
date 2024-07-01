@@ -37,8 +37,7 @@ export const GET = async (req: Request) => {
     });
 };
 
-// DO NOT FORGET TO INCLUDE THE `OPTIONS` HTTP METHOD
-// THIS WILL ENSURE CORS WORKS FOR BLINKS
+
 export const OPTIONS = GET;
 
 
@@ -46,8 +45,6 @@ export const OPTIONS = GET;
 
 
 export const POST = async (req: Request) => {
-    const url = new URL(req.url); // Create a URL object from the request
-    const amount = url.searchParams.get("amount"); // Get the "account" parameter
     try {
 
         const body: ActionPostRequest = await req.json(); //this is the body of the post request also the wallet address
@@ -85,10 +82,8 @@ export const POST = async (req: Request) => {
             //this will send the transaction to the blockchin and return the response 
             fields: {
                 transaction,
-                message: "We are Blinking people ",
+                message: "We are Blinking peeps ",
             },
-            // no additional signers are required for this transaction
-            // signers: [],
         });
 
         return Response.json(payload, {
