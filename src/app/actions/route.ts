@@ -13,8 +13,6 @@ import {
     SystemProgram,
     Transaction,
 } from "@solana/web3.js";
-import "dotenv/config"
-import { getKeypairFromEnvironment } from "@solana-developers/helpers";
 
 export const GET = async (req: Request) => {
     const payload: ActionGetResponse = {
@@ -27,7 +25,7 @@ export const GET = async (req: Request) => {
             actions: [
                 {
                     label: "Send me 0.002 sol",
-                    // href: "http://localhost:3000/actions",
+                    //href: "http://localhost:3000/actions",
                     href: "https://sol-actions.vercel.app/actions", 
                 }
             ]
@@ -68,9 +66,6 @@ export const POST = async (req: Request) => {
 
         // after getting the public we build the transaction
         const connection = new Connection(clusterApiUrl("mainnet-beta"), "confirmed");
-        let sender = getKeypairFromEnvironment("SECRET_KEY")
-        console.log("public key ", sender.publicKey);
-
         const transaction = new Transaction().add(
             SystemProgram.transfer({
                 fromPubkey: account,
