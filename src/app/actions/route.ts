@@ -18,10 +18,10 @@ import { getKeypairFromEnvironment } from "@solana-developers/helpers";
 
 export const GET = async (req: Request) => {
     const payload: ActionGetResponse = {
-        title: "Receive some devnet sol",
-        icon: new URL("/SOLUSDT.png", new URL(req.url).origin).toString(),
-        description: "Enter your devnet address to receive some devnet sol",
-        label: "Devnet sol",
+        title: "Send me 0.002 Sol",
+        icon: new URL("/Blink.jpg", new URL(req.url).origin).toString(),
+        description: "Testing out Blink",
+        label: "Send sol",
         disabled: false,
         links: {
             actions: [
