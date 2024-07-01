@@ -27,7 +27,7 @@ export const GET = async (req: Request) => {
             actions: [
                 {
                     label: "Send me 0.002 sol",
-                    href: "http://localhost:3000/actions",
+                    href: "https://sol-actions-j0q4dzrlu-sosj001s-projects.vercel.app/actions",
                 }
             ]
         }
