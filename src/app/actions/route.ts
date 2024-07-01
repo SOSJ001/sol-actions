@@ -16,20 +16,32 @@ import {
 
 export const GET = async (req: Request) => {
     const payload: ActionGetResponse = {
-        title: "Send me 0.002 Sol",
+        title: "Send some sol with Blink",
         icon: new URL("/Blink.jpg", new URL(req.url).origin).toString(),
-        description: "Testing out Blink",
+        description: "Testing out Blink - FYI this is on mainnet-beta",
         label: "Send sol",
         disabled: false,
         links: {
             actions: [
                 {
-                    label: "Send me 0.002 sol",
-                    //href: "http://localhost:3000/actions",
+                    label: "Send 0.002 SOL",
+                    // href: "http://localhost:3000/actions?amount=0.002",
                     href: "https://sol-actions.vercel.app/actions", 
+                },
+                {
+                    label: "Send",
+                    // href: "http://localhost:3000/actions?amount={amount}",
+                    href: "https://sol-actions.vercel.app/actions", 
+                    parameters: [
+                        {
+                            name: "amount", // field name
+                            label: "Enter a custom sol amount" // text input placeholder
+                        }
+                    ]
                 }
             ]
-        }
+        },
+        // error: { message: "Please try again. Keep Blinking." }
     };
 
     return Response.json(payload, {
@@ -46,6 +58,19 @@ export const OPTIONS = GET;
 
 export const POST = async (req: Request) => {
     try {
+        const url = new URL(req.url)
+        const searchParams = new URLSearchParams(url.searchParams);
+        const amountString = searchParams.get("amount")|| "0";
+        const amountRegex = /^\d+(\.\d+)?$/; // Matches numbers with optional decimal point
+        let amount: number 
+
+        if (amountRegex.test(amountString)) {
+            // Parse the validated string to a number
+            amount = parseFloat(amountString);
+            // console.log("amount is  ", amount + 1)
+        }else{return}
+        
+        ;
 
         const body: ActionPostRequest = await req.json(); //this is the body of the post request also the wallet address
 
@@ -67,7 +92,7 @@ export const POST = async (req: Request) => {
             SystemProgram.transfer({
                 fromPubkey: account,
                 toPubkey: new PublicKey("3ZPcjHB48wwrHmpj1pMkH3ohbEaajpTVHZJuAw4TwVzL"),
-                lamports: 0.002 * LAMPORTS_PER_SOL,
+                lamports: amount * LAMPORTS_PER_SOL,
             })
         );
 
